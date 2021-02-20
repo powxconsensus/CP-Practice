@@ -63,61 +63,38 @@ int main()
 {
     FastIO;
     ll tc;
+    string alpha;
     cin >> tc;
+    cin >> alpha;
     while (tc--)
     {
-        ll n, m;
-        cin >> n >> m;
-        vector<ll> A(n), B(n), B1, B2;
-        for (ll i = 0; i < n; i++)
-            cin >> A[i];
-        for (ll i = 0; i < n; i++)
+        string str, res = "";
+        cin >> str;
+        for (ll i = 0; i < str.size(); i++)
         {
-            cin >> B[i];
-            if (B[i] == 1)
-                B1.push_back(A[i]);
-            else
-                B2.push_back(A[i]);
-        }
-        ll tempM = 0, ans = 0;
-        bool flag = false;
-        // cout << B1.size() << " " << B2.size() << endl;
-        sort(B1.begin(), B1.end());
-        sort(B2.begin(), B2.end());
-        pair<ll, ll> mp(INT_MAX, INT_MAX);
-        vector<vector<pair<ll, ll>>> dp(2, vector<pair<ll, ll>>(m + 1, mp));
-        for (ll i = B1.size() - 1, j = 0; j <= m && i >= 0; j++)
-        {
-            if (j == 0)
-            {
-                dp[0][j].first = 0;
-                dp[0][j].second = 0;
-                continue;
-            }
-            if (dp[0][j - 1].second >= m)
-            {
-                dp[0][j] = dp[0][j - 1];
-            }
+            if (str[i] == '_')
+                res += ' ';
             else
             {
-                dp[0][j].first = dp[0][j - 1].first + 1;
-                dp[0][j].second = dp[0][j - 1].second + B1[i];
-                i--;
+                if (str[i] >= 'A' && str[i] <= 'Z')
+                {
+                    ll tempAl = str[i] - 'A';
+                    if (tempAl >= 0 && tempAl < 26)
+                        res += (char)(65 + (int)alpha[tempAl] - 97);
+                    else
+                        res += str[i];
+                }
+                else
+                {
+                    ll tempAl = str[i] - 'a';
+                    if (tempAl >= 0 && tempAl < 26)
+                        res += alpha[tempAl];
+                    else
+                        res += str[i];
+                }
             }
         }
-        // for (ll i = 0; i < n; i++)
-        // {
-        //     cout << dp[0][i].first << " " << dp[0][i].second << endl;
-        // }
-
-        continue;
-        if (dp[1][m].first == INT_MAX)
-        {
-            cout << -1 << endl;
-            continue;
-        }
-        cout << dp[1][m].first << endl;
+        cout << res << endl;
     }
-
     return 0;
 }
