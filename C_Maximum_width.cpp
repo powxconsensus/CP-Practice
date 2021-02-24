@@ -68,7 +68,7 @@ int main()
     cin >> a >> b;
     ll minIn = 0;
     ll maxIn = 0;
-    vector<ll> index;
+    vector<ll> index, temp;
     for (ll i = 0; i < a.size(); i++)
         if (a[i] == b[0])
         {
@@ -94,19 +94,20 @@ int main()
         }
     }
     index.push_back(maxIn);
-    ll maxxx = INT_MIN;
-    for (ll i = 0; i < index.size() - 1; i++)
-    {
-        if (abs(index[i + 1] - index[i]) > maxxx)
-        {
-            maxxx = abs(index[i + 1] - index[i]);
-        }
-    }
+    // ll maxxx = INT_MIN;
+    // for (ll i = 0; i < index.size() - 1; i++)
+    // {
+    //     if (abs(index[i + 1] - index[i]) > maxxx)
+    //     {
+    //         maxxx = abs(index[i + 1] - index[i]);
+    //     }
+    // }
     // for (auto it : index)
     //     cout << it << " ";
     // cout << endl;
     // cout << maxxx << endl;
     /////////////////////////////////////////////////
+    temp = index;
     index.clear();
     index.push_back(maxIn);
     for (ll i = b.size() - 2; i > 0; i--)
@@ -121,18 +122,23 @@ int main()
         }
     }
     index.push_back(minIn);
-    ll maxxx1 = INT_MIN;
-    for (ll i = 0; i < index.size() - 1; i++)
-    {
-        // cout << index[i + 1] << " " << index[i] << endl;
-        if (abs(index[i + 1] - index[i]) > maxxx1)
-        {
-            maxxx1 = abs(index[i + 1] - index[i]);
-        }
-    }
-    // for (auto it : index)
-    //     cout << it << " ";
-    // cout << endl;
-    cout << max(maxxx, maxxx1) << endl;
+    // ll maxxx1 = INT_MIN;
+    // for (ll i = 0; i < index.size() - 1; i++)
+    // {
+    //     // cout << index[i + 1] << " " << index[i] << endl;
+    //     if (abs(index[i + 1] - index[i]) > maxxx1)
+    //     {
+    //         maxxx1 = abs(index[i + 1] - index[i]);
+    //     }
+    // }
+    // // for (auto it : index)
+    // //     cout << it << " ";
+    // // cout << endl;
+    // cout << max(maxxx, maxxx1) << endl;
+    ll ans = INT_MIN;
+    reverse(index.begin(), index.end());
+    for (ll i = 0; i < n - 1; i++)
+        ans = max(ans, abs(temp[i] - index[i + 1]));
+    cout << ans << endl;
     return 0;
 }
