@@ -5,6 +5,7 @@
 #include <map>
 #include <set>
 #include <climits>
+#include <stack>
 
 using namespace std;
 
@@ -59,6 +60,47 @@ public:
     }
 };
 
+bool checkReg(string str)
+{
+    stack<char> st;
+    for (ll i = 0; i < str.size(); i++)
+    {
+        if (str[i] == '(')
+            st.push('(');
+        else if (st.size() != 0)
+            st.pop();
+        else
+            return false;
+    }
+    return (st.size() == 0);
+}
+bool recur(string str)
+{
+    string op = "()";
+    for (ll i = 0; i < 2; i++)
+    {
+        for (ll j = 0; j < 2; j++)
+        {
+            for (ll k = 0; k < 2; k++)
+            {
+                string temp = "";
+                for (ll m = 0; m < str.size(); m++)
+                {
+                    if (str[m] == 'A')
+                        temp += op[i];
+                    else if (str[m] == 'B')
+                        temp += op[j];
+                    else
+                        temp += op[k];
+                }
+                // cout << temp << endl;
+                if (checkReg(temp))
+                    return true;
+            }
+        }
+    }
+    return false;
+}
 int main()
 {
     FastIO;
@@ -66,18 +108,13 @@ int main()
     cin >> tc;
     while (tc--)
     {
-        ll n, k;
-        cin >> n >> k;
-        vector<ll> v(n * k);
-        for (ll i = 0; i < n; i++)
-            cin >> v[i];
-        ll low = n - 1;
-        ll ans = 0;
-        while (low < n)
-        {
-            ans += v[low];
-            low += n;
-        }
-        cout << ans << endl;
+        string str;
+        cin >> str;
+        ll flag = false;
+        if (!recur(str))
+            cout << "NO" << endl;
+        else
+            cout << "YES" << endl;
     }
+    return 0;
 }

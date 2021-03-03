@@ -58,26 +58,28 @@ public:
         return (f[n] * modInverse(f[n - r], m) % m) % m;
     }
 };
-
+ll precal(vector<vector<ll>> vec, ll p)
+{
+}
 int main()
 {
     FastIO;
     ll tc;
     cin >> tc;
+    ll test = 1;
     while (tc--)
     {
-        ll n, k;
-        cin >> n >> k;
-        vector<ll> v(n * k);
+        ll n, k, p;
+        cin >> n >> k >> p;
+        vector<vector<ll>> vec(n, vector<ll>(k));
         for (ll i = 0; i < n; i++)
-            cin >> v[i];
-        ll low = n - 1;
+            for (ll j = 0; j < k; j++)
+                cin >> vec[i][j];
         ll ans = 0;
-        while (low < n)
-        {
-            ans += v[low];
-            low += n;
-        }
-        cout << ans << endl;
+        vectro<>
+            precal(vec, p);
+        cout << "Case #" << test << ": " << ans << endl;
+        test++;
     }
+    return 0;
 }

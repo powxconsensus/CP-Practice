@@ -66,18 +66,17 @@ int main()
     cin >> tc;
     while (tc--)
     {
-        ll n, k;
-        cin >> n >> k;
-        vector<ll> v(n * k);
+        ll n;
+        cin >> n;
+        vector<ll> v(n);
         for (ll i = 0; i < n; i++)
             cin >> v[i];
-        ll low = n - 1;
-        ll ans = 0;
-        while (low < n)
-        {
-            ans += v[low];
-            low += n;
-        }
-        cout << ans << endl;
+        ll in = *max_element(v.begin(), v.end());
+        ll cou = count(v.begin(), v.end(), v[0]);
+        if (v[n - 1] == in && cou != n)
+            cout << "Yes" << endl;
+        else
+            cout << "No\n";
     }
+    return 0;
 }

@@ -64,20 +64,28 @@ int main()
     FastIO;
     ll tc;
     cin >> tc;
+    ll test = 1;
     while (tc--)
     {
-        ll n, k;
-        cin >> n >> k;
-        vector<ll> v(n * k);
+        ll n, b;
+        cin >> n >> b;
+        vector<ll> v(n);
         for (ll i = 0; i < n; i++)
             cin >> v[i];
-        ll low = n - 1;
+        sort(v.begin(), v.end());
         ll ans = 0;
-        while (low < n)
+        for (ll i = 0; i < n; i++)
         {
-            ans += v[low];
-            low += n;
+            if (v[i] <= b)
+            {
+                ans += 1;
+                b -= v[i];
+            }
+            else
+                break;
         }
-        cout << ans << endl;
+        cout << "Case #" << test << ": " << ans << endl;
+        test++;
     }
+    return 0;
 }

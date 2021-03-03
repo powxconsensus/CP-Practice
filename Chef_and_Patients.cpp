@@ -5,6 +5,7 @@
 #include <map>
 #include <set>
 #include <climits>
+#include <queue>
 
 using namespace std;
 
@@ -66,18 +67,29 @@ int main()
     cin >> tc;
     while (tc--)
     {
-        ll n, k;
-        cin >> n >> k;
-        vector<ll> v(n * k);
+        ll n;
+        cin >> n;
+        vector<ll> a(n);
+        // priority_queue<ll> g;
+        ll hour = 1;
+        vector<ll> ans(n, 0);
+        map<ll, vector<ll>> mp;
         for (ll i = 0; i < n; i++)
-            cin >> v[i];
-        ll low = n - 1;
-        ll ans = 0;
-        while (low < n)
         {
-            ans += v[low];
-            low += n;
+            cin >> a[i];
+            mp[a[i]].push_back(i);
         }
-        cout << ans << endl;
+        for (auto it = mp.rbegin(); it != mp.rend(); it++)
+        {
+            for (ll i = 0; i < it->second.size(); i++)
+            {
+                ans[it->second[i]] += hour;
+                hour++;
+            }
+        }
+        for (auto it : ans)
+            cout << it << " ";
+        cout << endl;
     }
+    return 0;
 }

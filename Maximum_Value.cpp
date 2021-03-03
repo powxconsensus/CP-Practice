@@ -66,18 +66,22 @@ int main()
     cin >> tc;
     while (tc--)
     {
-        ll n, k;
-        cin >> n >> k;
-        vector<ll> v(n * k);
+        ll n;
+        cin >> n;
+        vector<ll> vec(n);
         for (ll i = 0; i < n; i++)
-            cin >> v[i];
-        ll low = n - 1;
-        ll ans = 0;
-        while (low < n)
-        {
-            ans += v[low];
-            low += n;
-        }
-        cout << ans << endl;
+            cin >> vec[i];
+        ll ans = INT_MIN;
+        sort(vec.begin(), vec.end());
+        // ll ans1 = a + b - a * b;
+        ll ans1 = vec[0] - vec[1] + vec[0] * vec[1];
+        ll ans2 = vec[0] - vec[n - 1] + vec[0] * vec[n - 1];
+        ll ans3 = vec[n - 1] - vec[n - 2] + vec[n - 1] * vec[n - 2];
+        ll ans4 = -vec[0] + vec[1] + vec[0] * vec[1];
+        ll ans5 = -vec[0] + vec[n - 1] + vec[0] * vec[n - 1];
+        ll ans6 = -vec[n - 1] + vec[n - 2] + vec[n - 1] * vec[n - 2];
+        cout << max({ans1, ans2, ans3, ans4, ans5, ans6}) << endl;
+        // cout << ans << endl;
     }
+    return 0;
 }

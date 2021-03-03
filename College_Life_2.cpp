@@ -66,18 +66,24 @@ int main()
     cin >> tc;
     while (tc--)
     {
-        ll n, k;
-        cin >> n >> k;
-        vector<ll> v(n * k);
-        for (ll i = 0; i < n; i++)
-            cin >> v[i];
-        ll low = n - 1;
+        ll s;
+        cin >> s;
+        vector<ll> Q(s);
         ll ans = 0;
-        while (low < n)
+        for (ll i = 0; i < s; i++)
+            cin >> Q[i];
+        for (ll i = 0; i < s; i++)
         {
-            ans += v[low];
-            low += n;
+            ll E, l;
+            cin >> E;
+            for (ll i = 0; i < E; i++)
+            {
+                cin >> l;
+                ans += l;
+            }
+            ans -= (E - 1) * Q[i];
         }
         cout << ans << endl;
     }
+    return 0;
 }

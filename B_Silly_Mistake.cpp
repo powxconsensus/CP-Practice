@@ -62,22 +62,13 @@ public:
 int main()
 {
     FastIO;
-    ll tc;
-    cin >> tc;
-    while (tc--)
-    {
-        ll n, k;
-        cin >> n >> k;
-        vector<ll> v(n * k);
-        for (ll i = 0; i < n; i++)
-            cin >> v[i];
-        ll low = n - 1;
-        ll ans = 0;
-        while (low < n)
-        {
-            ans += v[low];
-            low += n;
-        }
-        cout << ans << endl;
+    ll n;
+    cin >> n;
+    vector<ll> vec(n);
+    for (ll i = 0; i < n; i++)
+        cin >> vec[i];
+    for(ll i=0;i<n;i++){
+        
     }
+    return 0;
 }

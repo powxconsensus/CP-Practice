@@ -66,18 +66,32 @@ int main()
     cin >> tc;
     while (tc--)
     {
-        ll n, k;
-        cin >> n >> k;
-        vector<ll> v(n * k);
-        for (ll i = 0; i < n; i++)
-            cin >> v[i];
-        ll low = n - 1;
-        ll ans = 0;
-        while (low < n)
+        string str;
+        cin >> str;
+        map<char, ll> mp;
+        ll n = str.size();
+        for (ll i = 0; i < str.size(); i++)
+            mp[str[i]]++;
+        ll odd = 0, even = 0;
+        for (auto x : mp)
         {
-            ans += v[low];
-            low += n;
+            if (x.second & 1)
+            {
+                odd++;
+                even += x.second / 2;
+            }
+            else
+            {
+                even++;
+            }
         }
-        cout << ans << endl;
+        if (even >= odd)
+        {
+            cout << "YES\n";
+        }
+        else
+        {
+            cout << "NO\n";
+        }
     }
 }

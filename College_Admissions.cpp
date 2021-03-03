@@ -66,18 +66,32 @@ int main()
     cin >> tc;
     while (tc--)
     {
-        ll n, k;
-        cin >> n >> k;
-        vector<ll> v(n * k);
+        ll n, m, x;
+        cin >> n >> m;
+        vector<ll> colRank(n);
         for (ll i = 0; i < n; i++)
-            cin >> v[i];
-        ll low = n - 1;
-        ll ans = 0;
-        while (low < n)
+            cin >> colRank[i];
+        map<ll, ll> studRank;
+        ll chefRank = 0;
+        for (ll i = 0; i < n; i++)
         {
-            ans += v[low];
-            low += n;
+            cin >> x;
+            if (i == 0)
+                chefRank = x;
+            studRank[x] = i + 1;
         }
-        cout << ans << endl;
+        vector<vector<ll>> studChoices(m);
+        for (ll i = 0; i < m; i++)
+        {
+            ll k;
+            cin >> k;
+            for (ll j = 0; j < k; j++)
+            {
+                ll x;
+                cin >> x;
+                studChoices[i].push_back(x);
+            }
+        }
     }
+    return 0;
 }

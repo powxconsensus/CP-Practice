@@ -66,18 +66,35 @@ int main()
     cin >> tc;
     while (tc--)
     {
-        ll n, k;
-        cin >> n >> k;
-        vector<ll> v(n * k);
-        for (ll i = 0; i < n; i++)
-            cin >> v[i];
-        ll low = n - 1;
-        ll ans = 0;
-        while (low < n)
+        ll d, c;
+        cin >> d >> c;
+        ll a1, a2, a3;
+        cin >> a1 >> a2 >> a3;
+        ll b1, b2, b3;
+        cin >> b1 >> b2 >> b3;
+        ll day1 = a1 + a2 + a3;
+        ll day2 = b1 + b2 + b3;
+        ll without = day1 + day2 + 2 * d;
+        if (day1 >= 150 && day2 >= 150)
         {
-            ans += v[low];
-            low += n;
+
+            ll withCo = day1 + day2 + c;
+            if (withCo < without)
+            {
+                cout << "YES\n";
+                continue;
+            }
         }
-        cout << ans << endl;
+        else if (day1 >= 150 || day2 >= 150)
+        {
+            ll withCo = day1 + day2 + c + d;
+            if (withCo < without)
+            {
+                cout << "YES\n";
+                continue;
+            }
+        }
+        cout << "NO\n";
     }
+    return 0;
 }

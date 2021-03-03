@@ -66,18 +66,17 @@ int main()
     cin >> tc;
     while (tc--)
     {
-        ll n, k;
-        cin >> n >> k;
-        vector<ll> v(n * k);
-        for (ll i = 0; i < n; i++)
-            cin >> v[i];
-        ll low = n - 1;
-        ll ans = 0;
-        while (low < n)
-        {
-            ans += v[low];
-            low += n;
-        }
-        cout << ans << endl;
+        ll m, h;
+        cin >> m >> h;
+        ll check = m / (h * h);
+        if (check <= 18)
+            cout << 1 << endl;
+        else if (check > 18 && check <= 24)
+            cout << 2 << endl;
+        else if ((check >= 25 && check <= 29))
+            cout << 3 << endl;
+        else
+            cout << 4 << endl;
     }
+    return 0;
 }

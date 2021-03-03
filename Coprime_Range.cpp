@@ -58,26 +58,45 @@ public:
         return (f[n] * modInverse(f[n - r], m) % m) % m;
     }
 };
-
+vector<ll> PrimeNumber;
+void SieveOfEratosthenes(int n)
+{
+    vector<bool> prime(n + 1, true);
+    for (int p = 2; p * p <= n; p++)
+    {
+        if (prime[p] == true)
+        {
+            for (int i = p * p; i <= n; i += p)
+                prime[i] = false;
+        }
+    }
+    for (int p = 2; p <= n; p++)
+        if (prime[p])
+            PrimeNumber.push_back(p);
+}
 int main()
 {
     FastIO;
+    SieveOfEratosthenes(1000000);
     ll tc;
     cin >> tc;
     while (tc--)
     {
-        ll n, k;
-        cin >> n >> k;
-        vector<ll> v(n * k);
-        for (ll i = 0; i < n; i++)
-            cin >> v[i];
-        ll low = n - 1;
-        ll ans = 0;
-        while (low < n)
+        ll l, r;
+        cin >> l >> r;
+        if (l == r && l % 2 != 0)
         {
-            ans += v[low];
-            low += n;
+            cout << 2 << endl;
+            continue;
         }
-        cout << ans << endl;
+        for (ll i = 1; i < PrimeNumber.size(); i++)
+        {
+            if (PrimeNumber[i] < l || PrimeNumber[i] > r)
+            {
+                cout << PrimeNumber[i] << endl;
+                break;
+            }
+        }
     }
+    return 0;
 }

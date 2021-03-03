@@ -62,22 +62,39 @@ public:
 int main()
 {
     FastIO;
-    ll tc;
-    cin >> tc;
-    while (tc--)
+    ll n, q;
+    cin >> n >> q;
+    vector<ll> vec(n);
+    for (ll i = 0; i < n; i++)
+        cin >> vec[i];
+    ll countOne = count(vec.begin(), vec.end(), 1);
+    // ll countZero = n - countOne;
+    while (q--)
     {
-        ll n, k;
-        cin >> n >> k;
-        vector<ll> v(n * k);
-        for (ll i = 0; i < n; i++)
-            cin >> v[i];
-        ll low = n - 1;
-        ll ans = 0;
-        while (low < n)
+        ll op, k;
+        cin >> op >> k;
+        if (op == 1)
         {
-            ans += v[low];
-            low += n;
+            if (vec[k - 1] == 0)
+            {
+                vec[k - 1] = 1;
+                countOne++;
+                // countZero--;
+            }
+            else
+            {
+                vec[k - 1] = 0;
+                // countZero++;
+                countOne--;
+            }
         }
-        cout << ans << endl;
+        else
+        {
+            if (countOne >= k)
+                cout << 1 << endl;
+            else
+                cout << 0 << endl;
+        }
     }
+    return 0;
 }
