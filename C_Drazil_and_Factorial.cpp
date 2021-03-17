@@ -1,16 +1,17 @@
-#include <algorithm>
-#include <bitset>
-#include <climits>
-#include <cmath>
-#include <ctime>
 #include <iostream>
+#include <algorithm>
+#include <vector>
+#include <cmath>
 #include <map>
-#include <queue>
 #include <set>
+#include <unordered_set>
+#include <set>
+#include <climits>
 #include <stack>
 #include <unordered_map>
-#include <unordered_set>
-#include <vector>
+#include <queue>
+#include <bitset>
+#include <ctime>
 
 using namespace std;
 
@@ -64,26 +65,7 @@ public:
         return (f[n] * modInverse(f[n - r], m) % m) % m;
     }
 };
+
 int main()
 {
-    ll n;
-    cin >> n;
-    vector<vector<ll>> dp(n);
-    ll front = 1, last = n * n;
-    for (ll i = 0; i < n; i++)
-    {
-        for (ll j = 0; j < n; j++)
-        {
-            dp[i].push_back(front);
-            dp[i].push_back(last);
-            front++;
-            last--;
-        }
-    }
-    for (ll i = 0; i < n; i++)
-    {
-        for (ll j = 0; j < n; j++)
-            cout << dp[i][j] << " ";
-        cout << endl;
-    }
 }

@@ -64,26 +64,31 @@ public:
         return (f[n] * modInverse(f[n - r], m) % m) % m;
     }
 };
+
 int main()
 {
-    ll n;
-    cin >> n;
-    vector<vector<ll>> dp(n);
-    ll front = 1, last = n * n;
+    string str, ans = "";
+    cin >> str;
+    ll n = str.size();
+    vector<string> ss;
     for (ll i = 0; i < n; i++)
     {
-        for (ll j = 0; j < n; j++)
+        if (i + 2 < n && str[i] == 'W' && str[(ll)(i + 1)] == 'U' && str[(ll)(i + 2)] == 'B')
         {
-            dp[i].push_back(front);
-            dp[i].push_back(last);
-            front++;
-            last--;
+            // cout << ans << endl;
+            if (ans != "")
+                ss.push_back(ans);
+            ans = "";
+            i++;
+            i++;
+            continue;
         }
+        else
+            ans += str[i];
     }
-    for (ll i = 0; i < n; i++)
-    {
-        for (ll j = 0; j < n; j++)
-            cout << dp[i][j] << " ";
-        cout << endl;
-    }
+    if (ans != "")
+        ss.push_back(ans);
+    string res = "";
+    for (auto it : ss)
+        cout << it << " ";
 }

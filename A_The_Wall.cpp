@@ -67,13 +67,48 @@ public:
 
 int main()
 {
-    ll x, y, a, b, count = 0;
-    cin >> x >> y >> a >> b;
-    // 1-a 1- a+B
-    ll tillA = b / x - a / x;
-    ll tillB = b / y - a / y;
+    // ll x, y, a, b, count = 0;
+    // cin >> x >> y >> a >> b;
+    // // 1-a 1- a+B
+    // ll tillA = b / x - a / x;
+    // ll tillB = b / y - a / y;
 
-    ll tillAB = (a + b) / y;
+    // ll tillAB = (a + b) / y;
 
-    cout << count << endl;
+    // cout << count << endl;
+
+    ll n, x, m;
+    cin >> n;
+    cin >> m;
+    vector<pair<ll, ll>> pp(n);
+    for (ll i = 0; i < n; i++)
+    {
+        cin >> x;
+        pp[i].first = x % m;
+        pp[i].second = i + 1;
+    }
+    sort(pp.begin(), pp.end());
+    ll q;
+    cin >> q;
+    while (q--)
+    {
+        ll x;
+        cin >> x;
+        ll low = 0, high = n - 1, ans = 0;
+        while (low <= high)
+        {
+            ll mid = (low + high) / 2;
+            ll check = (pp[mid].first + x % m) % m;
+            if (check <= pp[mid].first)
+            {
+                high = mid - 1;
+                ans = pp[mid].second;
+            }
+            else
+            {
+                low = mid + 1;
+            }
+        }
+        cout << ans << endl;
+    }
 }

@@ -1,17 +1,16 @@
-#include <iostream>
 #include <algorithm>
-#include <vector>
-#include <cmath>
-#include <map>
-#include <set>
-#include <unordered_set>
-#include <set>
+#include <bitset>
 #include <climits>
+#include <cmath>
+#include <ctime>
+#include <iostream>
+#include <map>
+#include <queue>
+#include <set>
 #include <stack>
 #include <unordered_map>
-#include <queue>
-#include <bitset>
-#include <ctime>
+#include <unordered_set>
+#include <vector>
 
 using namespace std;
 
@@ -68,4 +67,15 @@ public:
 
 int main()
 {
+    ll x, y;
+    cin >> x >> y;
+    ll ans = abs(x) + abs(y);
+    if (x > 0 && y > 0)
+        cout << 0 << " " << ans << " " << ans << " " << 0 << endl;
+    else if (x < 0 && y > 0)
+        cout << ans * -1 << " " << 0 << " " << 0 << " " << ans << endl;
+    else if (x < 0 && y < 0)
+        cout << ans * -1 << " " << 0 << " " << 0 << " " << ans * -1 << endl;
+    else
+        cout << 0 << " " << -1 * ans << " " << ans << " " << 0 << endl;
 }

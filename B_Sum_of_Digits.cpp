@@ -64,26 +64,24 @@ public:
         return (f[n] * modInverse(f[n - r], m) % m) % m;
     }
 };
+
+ll sumTill(string str)
+{
+    ll sum = 0;
+    for (auto it : str)
+        sum += (it - '0');
+    return sum;
+}
 int main()
 {
-    ll n;
-    cin >> n;
-    vector<vector<ll>> dp(n);
-    ll front = 1, last = n * n;
-    for (ll i = 0; i < n; i++)
+    string str;
+    cin >> str;
+    ll ans = 0;
+    while (str.size() != 1)
     {
-        for (ll j = 0; j < n; j++)
-        {
-            dp[i].push_back(front);
-            dp[i].push_back(last);
-            front++;
-            last--;
-        }
+        ll sum = sumTill(str);
+        str = to_string(sum);
+        ans++;
     }
-    for (ll i = 0; i < n; i++)
-    {
-        for (ll j = 0; j < n; j++)
-            cout << dp[i][j] << " ";
-        cout << endl;
-    }
+    cout << ans << endl;
 }

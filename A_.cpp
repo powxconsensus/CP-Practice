@@ -1,3 +1,4 @@
+// https://codeforces.com/contest/1501/problem/A
 #include <algorithm>
 #include <bitset>
 #include <climits>
@@ -64,26 +65,28 @@ public:
         return (f[n] * modInverse(f[n - r], m) % m) % m;
     }
 };
+
 int main()
 {
-    ll n;
-    cin >> n;
-    vector<vector<ll>> dp(n);
-    ll front = 1, last = n * n;
-    for (ll i = 0; i < n; i++)
+    ll tc;
+    cin >> tc;
+    while (tc--)
     {
-        for (ll j = 0; j < n; j++)
+        ll n;
+        cin >> n;
+        ll ans = 0;
+        vector<pair<ll, ll>> vec(n);
+        for (ll i = 0; i < n; i++)
+            cin >> vec[i].first >> vec[i].second;
+        vector<ll> tm(n);
+        for (ll i = 0; i < n; i++)
+            cin >> tm[i];
+        ans += vec[0].first - 0;
+        for (ll i = 0; i < n - 1; i++)
         {
-            dp[i].push_back(front);
-            dp[i].push_back(last);
-            front++;
-            last--;
+            ans += (vec[i].second - vec[i].first);
+            ans += (vec[i + 1].first - vec[i].second + tm[i]);
         }
-    }
-    for (ll i = 0; i < n; i++)
-    {
-        for (ll j = 0; j < n; j++)
-            cout << dp[i][j] << " ";
-        cout << endl;
+        cout << ans << endl;
     }
 }

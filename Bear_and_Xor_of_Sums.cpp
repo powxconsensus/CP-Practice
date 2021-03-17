@@ -64,26 +64,67 @@ public:
         return (f[n] * modInverse(f[n - r], m) % m) % m;
     }
 };
+ll koko(ll l, ll r, vector<ll> &BIT, ll p)
+{
+    ll i = p, sum = 0;
+    //0-p
+    while (i != 0)
+    {
+        sum += BIT[i];
+        i = i & (i - 1);
+    }
+    //0-l
+    i = l;
+    ll ssum = 0;
+    while (i != 0)
+    {
+        ssum += BIT[i];
+        i = i & (i - 1);
+    }
+    return sum - ssum;
+}
+ll rec(vector<ll> &BIT, ll l, ll r, ll n, ll &ans, ll p)
+{
+    ans ^= BIT[p];
+    if (l - 1 >= 0)
+        ans ^= BIT[p] - BIT[l - 1];
+
+    ll x = koko(l, r, BIT, p);
+    ans ^= x;
+    if (l + 1 <= r)
+        x = koko(l + 1, r, BIT, p);
+    ans ^= x;
+    return 0;
+}
 int main()
 {
     ll n;
     cin >> n;
-    vector<vector<ll>> dp(n);
-    ll front = 1, last = n * n;
+    vector<ll> vec(n), BIT(n + 1, 0);
     for (ll i = 0; i < n; i++)
+        cin >> vec[i];
+    BIT[0] = 0;
+    for (ll i = 1; i < n + 1; i++)
     {
-        for (ll j = 0; j < n; j++)
+        // ll parent = i - (((~i) + 1) & i); // x&(x-1) to flip right most set bit
+        ll next = i;
+        while (next < n + 1)
         {
-            dp[i].push_back(front);
-            dp[i].push_back(last);
-            front++;
-            last--;
+            BIT[next] += vec[i - 1];
+            next = (((~next) + 1) & next) + next;
         }
     }
-    for (ll i = 0; i < n; i++)
+    // for (ll i = 0; i < n + 1; i++)
+    //     cout << BIT[i] << endl;
+    ll ans = BIT[1];
+    for (ll i = 2; i < n + 1; i++)
     {
-        for (ll j = 0; j < n; j++)
-            cout << dp[i][j] << " ";
-        cout << endl;
+        ll parent = i - (((~i) + 1) & i);
+        ll next = i + (((~i) + 1) & i);
+        cout << parent + 1 << " " << i << " " << ans << endl;
+        rec(BIT, parent + 1, i, n, ans, i);
+        cout << "ans: " << ans << endl;
     }
+    // rec(ans, 2, BIT);
+    cout << ans << endl;
 }

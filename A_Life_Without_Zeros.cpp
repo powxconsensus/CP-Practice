@@ -64,26 +64,36 @@ public:
         return (f[n] * modInverse(f[n - r], m) % m) % m;
     }
 };
+
+ll removeZero(ll a)
+{
+    vector<ll> store;
+    while (a)
+    {
+        if (a % 10 != 0)
+            store.push_back(a % 10);
+        a /= 10;
+    }
+    ll ans = 0, mul = 1;
+    for (auto it : store)
+    {
+        ans += it * mul;
+        mul *= 10;
+    }
+    // cout << ans << endl;
+    return ans;
+}
 int main()
 {
-    ll n;
-    cin >> n;
-    vector<vector<ll>> dp(n);
-    ll front = 1, last = n * n;
-    for (ll i = 0; i < n; i++)
-    {
-        for (ll j = 0; j < n; j++)
-        {
-            dp[i].push_back(front);
-            dp[i].push_back(last);
-            front++;
-            last--;
-        }
-    }
-    for (ll i = 0; i < n; i++)
-    {
-        for (ll j = 0; j < n; j++)
-            cout << dp[i][j] << " ";
-        cout << endl;
-    }
+    ll a, b, c;
+    cin >> a >> b;
+    c = a + b;
+    ll newA, newB, newC;
+    newA = removeZero(a);
+    newB = removeZero(b);
+    newC = removeZero(c);
+    if (newA + newB == newC)
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
 }

@@ -64,26 +64,21 @@ public:
         return (f[n] * modInverse(f[n - r], m) % m) % m;
     }
 };
+
 int main()
 {
-    ll n;
+    ll n, x;
     cin >> n;
-    vector<vector<ll>> dp(n);
-    ll front = 1, last = n * n;
+    vector<ll> vec(3001, -1);
     for (ll i = 0; i < n; i++)
     {
-        for (ll j = 0; j < n; j++)
+        cin >> x;
+        vec[x - 1] = 1;
+    }
+    for (ll i = 0; i <= 3000; i++)
+        if (vec[i] == -1)
         {
-            dp[i].push_back(front);
-            dp[i].push_back(last);
-            front++;
-            last--;
+            cout << i + 1 << endl;
+            return 0;
         }
-    }
-    for (ll i = 0; i < n; i++)
-    {
-        for (ll j = 0; j < n; j++)
-            cout << dp[i][j] << " ";
-        cout << endl;
-    }
 }

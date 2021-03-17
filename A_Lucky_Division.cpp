@@ -64,26 +64,41 @@ public:
         return (f[n] * modInverse(f[n - r], m) % m) % m;
     }
 };
+void countLucky(string str, vector<ll> &allLucky)
+{
+    ll num1 = stoi(str + "7");
+    if (num1 > 1000)
+        return;
+    allLucky.push_back(num1);
+    countLucky(str + "7", allLucky);
+    ll num2 = stoi(str + "4");
+    if (num2 > 1000)
+        return;
+    allLucky.push_back(num2);
+    countLucky(str + "4", allLucky);
+}
 int main()
 {
     ll n;
     cin >> n;
-    vector<vector<ll>> dp(n);
-    ll front = 1, last = n * n;
-    for (ll i = 0; i < n; i++)
+    vector<ll> allLucky;
+    countLucky("", allLucky);
+
+    for (ll i = 0; i < allLucky.size(); i++)
     {
-        for (ll j = 0; j < n; j++)
+        if (n % allLucky[i] == 0)
         {
-            dp[i].push_back(front);
-            dp[i].push_back(last);
-            front++;
-            last--;
+            // if (n == allLucky[i])
+            // {
+            //     cout << "YES" << endl;
+            //     return 0;
+            // }
+            // if ((n / allLucky[i]) % 2 == 0)
+            // {
+            cout << "YES" << endl;
+            return 0;
+            // }
         }
     }
-    for (ll i = 0; i < n; i++)
-    {
-        for (ll j = 0; j < n; j++)
-            cout << dp[i][j] << " ";
-        cout << endl;
-    }
+    cout << "NO" << endl;
 }
